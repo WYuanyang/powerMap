@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>canvas绘制动态能力分布图demo</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	</head>
+	<body>
+		<div style="text-align: center;padding: 20px 0;" id="desc">
+			canvas绘制动态能力分布图
+		</div>
+		<div style="margin: 0 auto;height: 320px;width: 320px;"  id="powerMap"></div>
+		<div style="text-align: center;" id="demo">
+			<input type="number" name="sides" id="sides" value=""  maxlength="2" placeholder="请输入边数"/>
+			<button id="button">确定</button>
+		</div>
+		<script src="js/power-map.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+		<script type="text/javascript">
+			
+			
+			
+			
+			window.onload = function(){
+				
+				function randomIcons(sides){
+					var randomIcons = new Array();
+					var icons = [{
+						iconPath:'images/icon1.png',
+						text:'身份'
+						},
+						{
+							iconPath:'images/icon2.png',
+							text:'资产'
+						},
+						{
+							iconPath:'images/icon3.png',
+							text:'偏好'
+						},
+						{
+							iconPath:'images/icon4.png',
+							text:'履约'
+						},
+						{
+							iconPath:'images/icon5.png',
+							text:'关系'
+					}];
+					for(var i =0;i<sides;i++){
+						var num = Math.floor(Math.random()*icons.length);
+						
+						randomIcons.push(icons[num]);
+					}
+					return randomIcons;
+				}
+				
+				PM.create();
+				button.onclick = function(){
+					var cfg = new Object();
+					var val = document.getElementById("sides").value;
+					var icons = randomIcons(val);
+					cfg.sides = val;
+					cfg.powerTypeInfo = new Object();
+					cfg.powerTypeInfo.style = new Object();
+					cfg.powerTypeInfo.icon = icons;
+					PM.create(cfg);
+				}
+				
+			}
+		</script>
+		
+	</body>
+</html>
